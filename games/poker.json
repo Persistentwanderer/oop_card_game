@@ -1,0 +1,57 @@
+[
+    { 
+        "name": "Poker", 
+        "cover_art": "file",  
+        "players": {
+            "player_range": { 
+                "minimum": 3, 
+                "maximum": 8
+            }, 
+            "dealer": 1
+        },
+        "valid_strategies": "test",
+        "deck": {
+            "legal_cards": {
+                "card_names": {
+                    "As": 1,
+                    "2": 2,
+                    "3": 3,
+                    "4": 4,
+                    "5": 5,
+                    "6": 6,
+                    "7": 7,
+                    "8": 8,
+                    "9": 9,
+                    "10": 10,
+                    "Valet": 11,
+                    "Reine": 12,
+                    "Roi": 13
+                },
+                "card_suits": {
+                    "Pic": 1,
+                    "Coeur": 2,
+                    "Trefle": 3,
+                    "Carreau": 4
+                },
+            "card_array": [
+                [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1], [8, 1], [9, 1], [10, 1], [11, 1], [12, 1], [13, 1],
+                [1, 2], [2, 2], [3, 2], [4, 2], [5, 2], [6, 2], [7, 2], [8, 2], [9, 2], [10, 2], [11, 2], [12, 2], [13, 2],
+                [1, 3], [2, 3], [3, 3], [4, 3], [5, 3], [6, 3], [7, 3], [8, 3], [9, 3], [10, 3], [11, 3], [12, 3], [13, 3],
+                [1, 4], [2, 4], [3, 4], [4, 4], [5, 4], [6, 4], [7, 4], [8, 4], [9, 4], [10, 4], [11, 4], [12, 4], [13, 4]
+            ],
+            "*attribute": "hello"
+        }
+    },
+    "round_setter": {
+        "number_of_rounds": 10, 
+        "round_end_condition": "Score",
+        "round_end_score_amount": 100,
+        "round_style": "Clockwise",
+        "round_setter": "Shuffle",
+
+        "hand_setter": {
+            "cards_in_hand": 
+        }
+    }
+   }
+]
