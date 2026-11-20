@@ -8,10 +8,10 @@ class Player():
         self.__strategy = strategy
         if piles: 
             for pile in piles: 
-                self.__f"{pile}" = pile
-            self.__hand = hand
+                self.__"pile" = pile
 
-    def take_turn(self, valid_moves): 
+    def take_turn(self, game_state, valid_moves): 
+
         self.strategy.chose_move(valid_moves)
         
     def discard(self, source, destination): 

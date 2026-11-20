@@ -5,7 +5,7 @@ import card
 import deck
 
 class Game(): 
-    def __init__(self, game_file=None, player=None, cpu_player=None): 
+    def __init__(self, game_file=None, players=None, number_of_cpu=None): 
         if game_file: 
             # 3. Deserialize back into Book objects using JsonMixin.from_dict()
             with open(str(chosen_game), "r", encoding="utf-8") as f:
@@ -13,24 +13,43 @@ class Game():
 
                 self.name = self.__base["name"]
 
-                self.player_range = self.__base["player"]["player_range"]
+                # Handles games with one dealer
+                if dealer: 
+                    import Dealer
+                    self.dealer = Dealer(attributes)
+                
+                # Sets player details
+                self.set_players(players)
 
-                self.players = dict(self.set_players(self.__base["players"]))
+                # Deck constructor
+                self.set_base_deck()
 
-                self.__opening_hand_size = self.__base()
+                # 
 
-    @property
-    def players(self): 
+    def set_players(self): 
+        # Check that player array is valid and within the player_range
+        self.player_range = self.__base["player"]["player_range"]
+        if len(dict(players)) not in range(self.player_range): 
+            raise ValueError("You have too many players")
+        self.players = {}
+        for p in players: 
+            # Need to check if this is the right syntax
+            self.players.update(p)
+        
+
+
         return self._player_list
 
-    @setter
-    def players(self, players): 
-        if len(players) in range(self.player_range): 
+
+    def return_players(self, players): 
+        
+
 
 
     
-    def new_session(self): 
-
+    
+    def new_game_session(self): 
+        self.
 
     def new_round(self)        
         # for ACTIVE player?
@@ -40,7 +59,7 @@ class Game():
                 player.take_turn()
     
 
-    def distribute_cards(self, player): 
+    def distribute_cards(self): 
 
         
         

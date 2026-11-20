@@ -7,7 +7,8 @@ cover_art: ""
 dealer: 
   # Options: true, false
   present: 
-
+  # Options: "custom", "safe", "greedy"
+  dealer_strategy: 
 
 player:
   player_range:
@@ -20,8 +21,6 @@ player:
   # Available options: ["skip", "play", "draw", "discard", "knock", "steal"]
   player_moves: []
     
-  # Options: 0 (Player 1 index), "lowest_card_holder", "random", "loser_of_last_round", "winner_of_last_round"
-  starting_player: 0
 
 valid_strategies: []
 
@@ -41,6 +40,17 @@ deck_constructor:
       
     # Format: [[card_value, suit_id], [card_value, suit_id], ...]
     card_array: []
+
+# ==========================================
+# OTHER PILES
+# ==========================================
+pile_constructor: 
+  piles:
+    draw_pile:
+      - "name": "" # string
+      - "action_on_empty": # "end_round" - do I need to define this actually ?
+    play_pile: 
+    discard_pile:
 
 # ==========================================
 # RULES, RANKING & EFFECTS
@@ -69,7 +79,7 @@ card_effects:
       - source:
       # Options: "self", "public"
       - destination: 
-      - amount_of_cards
+      - amount_of_cards: # Int
     - "steal": 
       # Options: "opponenent_hand", "oppenent_table", "play_pile"
       - source: 
@@ -129,12 +139,17 @@ session_setter:
 
 rounds:
   round_conditions:
+    # Comment out irrelevant conditions
     round_win_condition:
       cards_in_hand: 0
     round_end_condition:
       active_players: 1
+    pile_full: 
+      pile: "" # name of the pile you want to have adhere to this. 
       
   round_setter:
+    # Options: 0 (Player 1 index), "lowest_card_holder", "random", "loser_of_last_round", "winner_of_last_round"
+    starting_player: 0
     pre_round_actions:
       # Options: true, false
       new_deck: 

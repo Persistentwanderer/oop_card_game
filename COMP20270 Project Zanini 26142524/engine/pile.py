@@ -28,6 +28,9 @@ class Pile():
             return self.__card_list
         else: return None
 
+    def __str__(self): 
+        return self.__card_list
+
 
 class DrawPile(Pile): 
     def __init__(self, cards):
