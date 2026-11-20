@@ -1,6 +1,4 @@
-import random
-
-class Deck():
+class pile():
     def __init__(self, input_cards, visibility): 
         self.__card_list = []
         for card in input_cards: 
@@ -17,7 +15,11 @@ class Deck():
         self.__card_list = random.shuffle(self.__card_list)
         return self.__card_list
 
-    def remaining_view(self): 
+
+    def view_initial_deck(self): 
+        full_deck
+
+    def sorted_remaining_view(self): 
         if self.visibility == 1: 
             return sorted(self.__input_cards)
         else: return None
