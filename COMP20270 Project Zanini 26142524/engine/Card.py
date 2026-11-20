@@ -3,10 +3,6 @@ class Card():
     def __init__(self, value = None, suit = None, **kwargs): 
         self.value = value 
         self.suit = suit
-        # for arg in kwargs:
-        #     self.(str(arg)) = arg
-        if enhancement: self.enhancement = enhancement
-        if series: self.series = series
 
     @property
     def value(self): 

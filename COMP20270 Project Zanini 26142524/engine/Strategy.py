@@ -1,17 +1,17 @@
 import game
 import random
 
-class strategy(): 
+class Strategy(): 
     def __init__(self): 
         self.strategies = []
     
 
 
-class greedy(strategy): 
+class GreedyStrategy(Strategy): 
     def __init__(self, motivation): 
         super().__init__(self)
 
-class random(strategy): 
+class RandomStrategy(Strategy): 
     def __init__(self): 
         super().__init__(self)
 
@@ -19,9 +19,10 @@ class random(strategy):
         chosen_card = random.choice(source)
         Deck.card_removesource
 
-class tactical(strategy): 
-    def __init__(self, motivation): 
+class TacticalStrategy(Strategy): 
+    def __init__(self, motivation, players, decks): 
         super().__init__(self)
+        self.__seen_cards = {}
 
 
 
