@@ -1,6 +1,6 @@
 { 
     "name": "President", 
-    "cover_art": "file",  
+    "cover_art": "./cover.png",  
 
     "dealer": 0,
     "player": {        
@@ -18,7 +18,7 @@
         "player_moves": ["pass", "play", "pioute"]
 
     },
-    "valid_strategies": "test",
+    "valid_strategies": ["./greedy.py","./random.py","./tactical"],
     "deck_constructor": {
         "legal_cards": {
             "card_names": {
