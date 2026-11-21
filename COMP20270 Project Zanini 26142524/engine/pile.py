@@ -17,16 +17,23 @@ class Pile():
         self.__card_list = random.shuffle(self.__card_list)
         return self.__card_list
 
-
     # def sorted_remaining_view(self): 
     #     if self.visibility == 1: 
     #         return sorted(self.__input_cards)
     #     else: return None
     
-    def print_deck(self): 
+    def return_deck(self): 
         if self._visibility == 1: 
             return self.__card_list
         else: return None
+    
+    def return_pile_sorted_by_attribute(self, attribute): 
+        self.__pile_sorted_by_attribute = []
+        for c in self.__card_list: 
+            self.__pile_sorted_by_attribute.add(c.get_attributes())
+
+        return sorted(self.__deck_sorted_by_attribute, key=lambda x: x[attribute])
+        # reverse the string to make it so that the suit is the first thing that is ranked
 
     def __str__(self): 
         return self.__card_list

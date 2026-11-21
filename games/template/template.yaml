@@ -1,25 +1,31 @@
 # ==========================================
 # GAME METADATA & SETUP
 # ==========================================
-name: ""
-cover_art: ""
+game_metadata: 
+  name: "" # string
+  cover_art: "" # filepath in the game file directory
 
-dealer: 
-  # Options: true, false
-  present: 
-  # Options: "custom", "safe", "greedy"
-  dealer_strategy: 
-
-player:
-  player_range:
-    minimum: 1
-    maximum: 10
+game_config:
+  player_config:
+    player_range:
+      minimum: 1 # Integer > 0 
+      maximum: 10 # Integer > minimum
   
-  # Define custom hierarchy names and their integer weights (e.g., Winner: 2, Loser: 0)
-  player_ranks: {}
+  team_config: 
+    teams_enabled: # true, false
+    team_size: # int
+    unbalanced_team_size_resolution: # random, refuse
+  
+  dealer: 
+    dealer_enabled: # Options: true, false
+    dealer_player: # If the dealer is also a player / rotates 
+    dealer_strategy: # Options: "custom", "safe", "greedy"
+
+    # Define custom hierarchy names and their integer weights (e.g., Winner: 2, Loser: 0)
+    player_ranks: {}
     
-  # Available options: ["skip", "play", "draw", "discard", "knock", "steal"]
-  player_moves: []
+    # Available options: ["skip", "play", "draw", "discard", "knock", "steal"]
+    player_moves: []
     
 
 valid_strategies: []
@@ -28,35 +34,41 @@ valid_strategies: []
 # DECK & CARD DEFINITIONS
 # ==========================================
 deck_constructor:
-  # Multiplier for the card_array (e.g., 2 = double deck for large lobbies)
-  number_of_decks: 1
+  # Multiplier for the card_array 
+  # You can enter an int (ie. 1, 2) or a dictionary where the key is the number of decks, and the values are the player counts corresponding to that number of players.
+  # ie. {1:[1,2,3,4], 2:[5,6,7,8]}
+  number_of_decks: 1 
   
   legal_cards:
     # Map card string names to integer weights (e.g., "Ace": 1, "King": 13)
     card_names: {}
       
-    # Map suit string names to integer IDs (e.g., "Pic": 1, "Coeur": 2)
+    # Map suit string names to integer IDs (e.g., "Spades": 1, "Heart": 2)
     card_suits: {}
       
-    # Format: [[card_value, suit_id], [card_value, suit_id], ...]
-    card_array: []
+  # Format: "One card for each value and name", [[card_value, suit_id], [card_value, suit_id], ...]
+  card_array: []
 
 # ==========================================
 # OTHER PILES
 # ==========================================
 pile_constructor: 
   piles:
+    # Options are: draw_pile, play_pile, discard_pile
     draw_pile:
-      - "name": "" # string
-      - "action_on_empty": # "end_round" - do I need to define this actually ?
+      - name: "" # string
+      - action_on_empty: # "end_round" - do I need to define this actually ?
     play_pile: 
+      name: "play_pile" #string
     discard_pile:
+      name: "discard_pile"
+    
 
 # ==========================================
 # RULES, RANKING & EFFECTS
 # ==========================================
 card_ranking:
-  # Ordered from weakest (left) to strongest (right)
+  # Ordered from weakest to strongest 
   base_order: []
   
   # Options: true, false
@@ -126,12 +138,12 @@ play_rules:
 # SESSION & ROUND FLOW
 # ==========================================
 session_setter:
-  number_of_rounds: 1
+  number_of_rounds: # int
   
   # Options: 0 (Most points), 1 (First to reach target score), 2 (Last standing)
   game_win_condition:  
   
-  # Options: "highest_final_round_rank", "most_total_points", "coin_flip"
+  # Options: "highest_final_round_rank", "most_total_points", "coin_flip", "both_win"
   game_tie_breaker: "" 
   
   # Map player_ranks to points earned at the end of a round (e.g., Winner: 5, Loser: 0)

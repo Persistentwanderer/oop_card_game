@@ -3,8 +3,9 @@ import Strategy
 import Pile
 
 class Player(): 
-    def __init__(self, name, strategy="random", *kwargs):
-        self.__name = name 
+    def __init__(self, player_number, name, strategy="random", *kwargs):
+        self._player_number = player_number
+        self._name = name 
         self.__strategy = strategy
         if piles: 
             for pile in piles: 
@@ -26,3 +27,6 @@ class Player():
     def play(self, source, destination): 
 
         for card in murder 
+
+    def __str__(self): 
+        retstr = f"{self._player_number}:\tName: {self._name}"

@@ -4,6 +4,7 @@ class Card():
         self.value = value 
         self.suit = suit
 
+
     @property
     def value(self): 
         return self.__value
@@ -22,5 +23,8 @@ class Card():
 
 
 class Attribute(Card):
-    def __init__(self, value, suit, *args): 
+    def __init__(self, value, suit, **kwargs): 
         super().__init__(value, suit)
+        for attribute in 
+
+

@@ -1,8 +1,9 @@
 import os
 import json 
 import json_stream
-import card
-import deck
+import Card
+import Deck
+import Player
 
 class Game(): 
     def __init__(self, game_file=None, players=None, number_of_cpu=None): 
@@ -21,11 +22,10 @@ class Game():
                 # Sets player details
                 self.set_players(players)
 
-                # Deck constructor
-                self.set_base_deck()
+                # Runs the base deck constructor
+                self.deck_constructor()
 
                 # 
-
     def set_players(self): 
         # Check that player array is valid and within the player_range
         self.player_range = self.__base["player"]["player_range"]
@@ -34,24 +34,29 @@ class Game():
         self.players = {}
         for p in players: 
             # Need to check if this is the right syntax
-            self.players.update(p)
-        
-
-
+            self.players.update(Player(p))
         return self._player_list
+        
+    def deck_constructor(): 
+        self._base_deck = Deck()
+        for card in self.__base["deck_constructor"]["card_array"]: 
+            self._base_deck.
+
+    def pile_constructor()
 
 
-    def return_players(self, players): 
+
+
+    def list_players(self): 
+        return self._player_list
+        
+    def new_game_session(self): 
+
+        if self._end_condition = 
+        self.new_round()
         
 
-
-
-    
-    
-    def new_game_session(self): 
-        self.
-
-    def new_round(self)        
+    def new_round(self): 
         # for ACTIVE player?
         for player in self.active_player_list: 
             self.distribute_cards()
