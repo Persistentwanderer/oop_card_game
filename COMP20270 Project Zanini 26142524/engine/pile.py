@@ -6,22 +6,20 @@ class Pile():
         for card in input_cards: 
             self.__card_list.append(Card(card))
 
-    def deal_card(self, source, destination): 
+    def deal_card(self, destination): 
         #check the instance / class of the source and the destination
         # then
         card_to_deal = self.__card_list[0]
         self.__card_list.pop[0]
         return card_to_deal
         
+    def add_card_to_deck(self, source): 
+        self.__card_list.append(source)
+
     def shuffle(self):
         self.__card_list = random.shuffle(self.__card_list)
         return self.__card_list
 
-    # def sorted_remaining_view(self): 
-    #     if self.visibility == 1: 
-    #         return sorted(self.__input_cards)
-    #     else: return None
-    
     def return_deck(self): 
         if self._visibility == 1: 
             return self.__card_list
@@ -34,6 +32,9 @@ class Pile():
 
         return sorted(self.__deck_sorted_by_attribute, key=lambda x: x[attribute])
         # reverse the string to make it so that the suit is the first thing that is ranked
+
+    def __setitem__(self, card):
+        self.__card_list.append(card)
 
     def __str__(self): 
         return self.__card_list
@@ -58,36 +59,7 @@ class Hand(Pile):
         super().__init__()
 
 class Deck(Pile):
-    def __init__(self):
+    def __init__(self, card_list):
         super().__init__()
-
-    def __init__(self, input_cards, visibility): 
-        self.__card_list = []
-        for card in input_cards: 
-            self.__card_list.append(Card(card))
-
-    def deal_card(self, source, destination): 
-        #check the instance / class of the source and the destination
-        # then
-        card_to_deal = self.__card_list[0]
-        self.__card_list.pop[0]
-        return card_to_deal
-        
-    def shuffle(self):
-        self.__card_list = random.shuffle(self.__card_list)
-        return self.__card_list
-
-
-    def view_initial_deck(self): 
-        full_deck
-
-    def sorted_remaining_view(self): 
-        if self.visibility == 1: 
-            return sorted(self.__input_cards)
-        else: return None
-    
-    def print_deck(self): 
-        if self._visibility == 1: 
-            return self.__card_list
-        else: return None
-
+        for card in card_list: 
+            self._

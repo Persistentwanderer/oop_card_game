@@ -40,7 +40,8 @@ class Game():
     def deck_constructor(): 
         self._base_deck = Deck()
         for card in self.__base["deck_constructor"]["card_array"]: 
-            self._base_deck.
+            # How do I get the append 
+            self._base_deck.append(card)
 
     def pile_constructor()
 

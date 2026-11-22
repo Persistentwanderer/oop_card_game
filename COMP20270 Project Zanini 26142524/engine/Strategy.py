@@ -1,15 +1,20 @@
-import game
+import Game
 import random
+import Player
 
 class Strategy(): 
-    def __init__(self):         
+    def __init__(self): 
+        hello = "world"        
 
 class GreedyStrategy(Strategy): 
-    def __init__(self, motivation): 
+    def __init__(self, player, motivation): 
         super().__init__()
         self.__motivation = motivation
     def choose_move(self, valid_moves): 
-        for 
+        if "play" in valid_moves:
+
+    def choose_highest_card 
+
 
 class RandomStrategy(Strategy): 
     def __init__(self): 
@@ -21,10 +26,10 @@ class RandomStrategy(Strategy):
 
     def chose_card(source, destination): 
         chosen_card = random.choice(source)
-        Deck.card_removesource
+        return 
 
 class TacticalStrategy(Strategy): 
-    def __init__(self, motivation, players, **kwargs): 
+    def __init__(self, motivation, player, other_players, **kwargs): 
         super().__init__()
         for player in players: 
             self.__f"{player}"_seen_cards = []
