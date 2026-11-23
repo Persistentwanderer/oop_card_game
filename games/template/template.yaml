@@ -1,6 +1,7 @@
 # ==========================================
 # GAME METADATA & SETUP
 # ==========================================
+# All the data needed for the GamePicker
 game_metadata: 
   name: "" # string
   cover_art: "" # filepath in the game file directory
@@ -10,22 +11,20 @@ game_config:
     player_range:
       minimum: 1 # Integer > 0 
       maximum: 10 # Integer > minimum
+
   
   team_config: 
     teams_enabled: # true, false
     team_size: # int
-    unbalanced_team_size_resolution: # random, refuse
+    unbalanced_team_size_resolution: # set, random, refuse
   
   dealer: 
     dealer_enabled: # Options: true, false
-    dealer_player: # If the dealer is also a player / rotates 
+    dealer_player: # Defines if the dealer is a player, and what their r
+    dealer_rotates: #
+        
     dealer_strategy: # Options: "custom", "safe", "greedy"
 
-    # Define custom hierarchy names and their integer weights (e.g., Winner: 2, Loser: 0)
-    player_ranks: {}
-    
-    # Available options: ["skip", "play", "draw", "discard", "knock", "steal"]
-    player_moves: []
     
 
 valid_strategies: []
@@ -54,10 +53,10 @@ deck_constructor:
 # ==========================================
 pile_constructor: 
   piles:
-    # Options are: draw_pile, play_pile, discard_pile
+    # Pile types are: draw_pile, play_pile, discard_pile
     draw_pile:
       - name: "" # string
-      - action_on_empty: # "end_round" - do I need to define this actually ?
+      - constructor: "full_deck" # "end_round" - do I need to define this actually ?
     play_pile: 
       name: "play_pile" #string
     discard_pile:
@@ -123,6 +122,12 @@ play_rules:
   # Options: "equal_or_higher", "equal_or_lower", "higher", "lower", "any"
   beat_previous_by: 
   
+  # Define custom hierarchy names and their integer weights (e.g., Winner: 2, Loser: 0)
+  player_ranks: {}
+    
+  # Available options: ["skip", "play", "draw", "discard", "knock", "steal"]
+  player_moves: []
+
   # Available possibilities: "single", "pair", "triple", "four_of_a_kind", "full_house", "flush", "sequence"
   allowed_combinations: []
     
@@ -131,7 +136,10 @@ play_rules:
   
   # House rules / Special toggles (Options: true, false)
   special_rules:
-    revolution_enabled: false
+    invert_card_ranking_order: 
+      enabled: true
+      condition: "four_of_a_kind"
+
     can_finish_on_special_card: true
 
 # ==========================================
@@ -160,12 +168,10 @@ rounds:
       pile: "" # name of the pile you want to have adhere to this. 
       
   round_setter:
-    # Options: 0 (Player 1 index), "lowest_card_holder", "random", "loser_of_last_round", "winner_of_last_round"
-    starting_player: 0
     pre_round_actions:
       # Options: true, false
-      new_deck: 
-      shuffle_deck: 
+      new_deck: true
+      shuffle_deck: true # only applies if 
       
       card_exchange:
         # Options: true, false
@@ -176,15 +182,19 @@ rounds:
           #   to: "WinnerRank"
           #   count: 2
           #   type: "best"
-            
-    # Options: "Clockwise", "Counter-Clockwise", "Freeflow"
-    movement_style: "Clockwise"
-    
+
     player_hand_setter:
       cards_in_hand:
         # Options: "Distribute all", or an integer count that does not conflict with the amount of players 
         hidden: "Distribute all"
         visible: 0
+        
+        cards_in_hand_range:
+          minimum: 0
+          maximum: 7
       cards_on_table:
         hidden: 0
         visible: 0
+    starting_player: 0 # Options: 0 (Player index), "lowest_card_holder", "random", "loser_of_last_round", "winner_of_last_round"
+    # Options: "Clockwise", "Counter-Clockwise", "Freeflow"
+    movement_style: "Clockwise"

@@ -1,3 +1,45 @@
-[ ] Figure out how to get the prompting for the player details / formatting to use
+* ENGINE
+⊙ TODO Working Card Function 
+⊙ TODO Working Deck logic
+⊙ TODO Draw / Play Pile
+⊙ TODO Random Strategy implemented
+⊙ TODO Running game.py with play_rules, session_setter and round setter 
+⊙ TODO get bataille working
+⊙ TODO get bataille imported from the YAML file 
+⊙ TODO Discard piles
+⊙ TODO game states & yaml importing of game states
+⊙ TODO card value arrays into game state functions
+⊙ TODO Trumps logic into game states
+⊙ TODO dealer logic
+⊙ TODO dealer_player logic & rotation 
+⊙ TODO card_effects and card_triggers in game.py
+  ⊘ TODO card_effect_conditions
+⊙ TODO custom piles setting option
+⊙ TODO hands on table / hands in hand section
+⊙ TODO tactical strategy cards_seen implementation
+⊙ TODO can the 
+
+* Report
+  ⊘ TODO decide game for simulation
+  ⊘ TODO learn how to use the python statistics & analysis
+  ⊘ TODO 
+
+* GUI
+⊙ [ ] Figure out how to get the prompting for the player details / formatting to use
+⊙ TODO refine basic game_picker functions for public access
+⊙ TODO Create mainpage
+⊙ TODO Create settings menu
+⊙ TODO create per-game dropdown based on the Game_config ie. checking for dealer etc and displaying dropdowns and checkboxes based on 
+⊙ TODO Integrate card assets
+⊙ TODO Create background assets 
+⊙ TODO Create custom game creator forms interface
+⊙ 
+
+* Submision 
+⊙ TODO Shoot video
+⊙ TODO Edit video
+⊙ TODO submit to brightspace
+⊙ 
+
 
 

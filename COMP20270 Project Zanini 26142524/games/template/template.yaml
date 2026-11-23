@@ -1,0 +1,200 @@
+# ==========================================
+# GAME METADATA & SETUP
+# ==========================================
+# All the data needed for the GamePicker
+game_metadata: 
+  name: "" # string
+  cover_art: "" # filepath in the game file directory
+
+game_config:
+  player_config:
+    player_range:
+      minimum: 1 # Integer > 0 
+      maximum: 10 # Integer > minimum
+
+  
+  team_config: 
+    teams_enabled: # true, false
+    team_size: # int
+    unbalanced_team_size_resolution: # set, random, refuse
+  
+  dealer: 
+    dealer_enabled: # Options: true, false
+    dealer_player: # Defines if the dealer is a player, and what their r
+    dealer_rotates: #
+        
+    dealer_strategy: # Options: "custom", "safe", "greedy"
+
+    
+
+valid_strategies: []
+
+# ==========================================
+# DECK & CARD DEFINITIONS
+# ==========================================
+deck_constructor:
+  # Multiplier for the card_array 
+  # You can enter an int (ie. 1, 2) or a dictionary where the key is the number of decks, and the values are the player counts corresponding to that number of players.
+  # ie. {1:[1,2,3,4], 2:[5,6,7,8]}
+  number_of_decks: 1 
+  
+  legal_cards:
+    # Map card string names to integer weights (e.g., "Ace": 1, "King": 13)
+    card_names: {}
+      
+    # Map suit string names to integer IDs (e.g., "Spades": 1, "Heart": 2)
+    card_suits: {}
+      
+  # Format: "One card for each value and name", [[card_value, suit_id], [card_value, suit_id], ...]
+  card_array: []
+
+# ==========================================
+# OTHER PILES
+# ==========================================
+pile_constructor: 
+  piles:
+    # Pile types are: draw_pile, play_pile, discard_pile
+    draw_pile:
+      - name: "" # string
+      - constructor: "full_deck" # "end_round" - do I need to define this actually ?
+    play_pile: 
+      name: "play_pile" #string
+    discard_pile:
+      name: "discard_pile"
+    
+
+# ==========================================
+# RULES, RANKING & EFFECTS
+# ==========================================
+card_ranking:
+  # Ordered from weakest to strongest 
+  base_order: []
+  
+  # Options: true, false
+  trumps_exist: false
+
+card_effects:
+  available_options:
+  # Dictionary of supported card effect mechanics, and the args needed to run them:
+    - "clear_pile": 
+      - pile: # options: draw_pile, discard_pile, 
+    - "shuffle_pile": 
+      - pile: # options: draw_pile, discard_pile, draw_pile 
+    - "skip_next_player_turn":
+       
+      - conditions:  # Options: "unless_higher_card", "unless_equal_card"
+      - number_of_players_to_skip: #int
+    - "reverse_turn_order"
+    - "peek_at_pile":
+      # "draw_pile", "opponent", "discard_pile", 
+      - source:
+      # Options: "self", "public"
+      - destination: 
+      - amount_of_cards: # Int
+    - "steal": 
+      # Options: "opponenent_hand", "oppenent_table", "play_pile"
+      - source: 
+    - "swap": 
+      # Options "self", "opponent", ""
+      - "source_pile": 
+    - "murder"
+    - "draw_cards":
+    # Options: "self", 
+      - destination: 
+    # Number of cards to be drawn
+      - number_of_cards: 0
+    
+  # List of effects actually enabled for this specific game
+  active_effects: []
+  
+  # Map specific cards or play conditions to the active effects above
+  effect_triggers: []
+    # Format example:
+    # - trigger_card: "2"
+    #   effect: "clear_pile"
+    # - trigger_condition: "match_previous_rank"
+    #   effect: "skip_next_player_turn"
+
+play_rules:
+  # Options: false, "strictly_true", "true"
+  must_follow_suit: false
+  
+  # Options: "equal_or_higher", "equal_or_lower", "higher", "lower", "any"
+  beat_previous_by: 
+  
+  # Define custom hierarchy names and their integer weights (e.g., Winner: 2, Loser: 0)
+  player_ranks: {}
+    
+  # Available options: ["skip", "play", "draw", "discard", "knock", "steal"]
+  player_moves: []
+
+  # Available possibilities: "single", "pair", "triple", "four_of_a_kind", "full_house", "flush", "sequence"
+  allowed_combinations: []
+    
+  # Options: "out_for_round", "skip_go_round", "draw_card"
+  pass_behavior: "skip_go_round"
+  
+  # House rules / Special toggles (Options: true, false)
+  special_rules:
+    invert_card_ranking_order: 
+      enabled: true
+      condition: "four_of_a_kind"
+
+    can_finish_on_special_card: true
+
+# ==========================================
+# SESSION & ROUND FLOW
+# ==========================================
+session_setter:
+  number_of_rounds: # int
+  
+  # Options: 0 (Most points), 1 (First to reach target score), 2 (Last standing)
+  game_win_condition:  
+  
+  # Options: "highest_final_round_rank", "most_total_points", "coin_flip", "both_win"
+  game_tie_breaker: "" 
+  
+  # Map player_ranks to points earned at the end of a round (e.g., Winner: 5, Loser: 0)
+  scoring_rules: {}
+
+rounds:
+  round_conditions:
+    # Comment out irrelevant conditions
+    round_win_condition:
+      cards_in_hand: 0
+    round_end_condition:
+      active_players: 1
+    pile_full: 
+      pile: "" # name of the pile you want to have adhere to this. 
+      
+  round_setter:
+    pre_round_actions:
+      # Options: true, false
+      new_deck: true
+      shuffle_deck: true # only applies if 
+      
+      card_exchange:
+        # Options: true, false
+        enabled: false
+        exchange_rules: []
+          # Format example:
+          # - from: "LoserRank"
+          #   to: "WinnerRank"
+          #   count: 2
+          #   type: "best"
+
+    player_hand_setter:
+      cards_in_hand:
+        # Options: "Distribute all", or an integer count that does not conflict with the amount of players 
+        hidden: "Distribute all"
+        visible: 0
+        
+        cards_in_hand_range:
+          minimum: 0
+          maximum: 7
+      cards_on_table:
+        hidden: 0
+        visible: 0
+    starting_player: 0 # Options: 0 (Player index), "lowest_card_holder", "random", "loser_of_last_round", "winner_of_last_round"
+    # Options: "Clockwise", "Counter-Clockwise", "Freeflow"
+    movement_style: "Clockwise"

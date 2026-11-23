@@ -1,6 +1,7 @@
 import Card
+import ABC
 
-class Pile():
+class Pile(ABC):
     def __init__(self, input_cards, visibility): 
         self.__card_list = []
         for card in input_cards: 

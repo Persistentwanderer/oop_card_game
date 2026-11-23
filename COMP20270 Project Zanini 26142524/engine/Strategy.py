@@ -3,8 +3,8 @@ import random
 import Player
 
 class Strategy(): 
-    def __init__(self): 
-        hello = "world"        
+    def __init__(self, game): 
+        self.game = game       
 
 class GreedyStrategy(Strategy): 
     def __init__(self, player, motivation): 
@@ -12,9 +12,7 @@ class GreedyStrategy(Strategy):
         self.__motivation = motivation
     def choose_move(self, valid_moves): 
         if "play" in valid_moves:
-
-    def choose_highest_card 
-
+            player.play_highest_card()
 
 class RandomStrategy(Strategy): 
     def __init__(self): 

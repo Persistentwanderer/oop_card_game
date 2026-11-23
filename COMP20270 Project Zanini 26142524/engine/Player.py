@@ -3,9 +3,10 @@ import Strategy
 import Pile
 
 class Player(): 
-    def __init__(self, player_number, name, strategy="random", cpu=True):
+    def __init__(self, game, player_number, name, strategy="random", cpu=True):
         self._player_number = player_number
         self._name = name 
+        self.game = game 
         if cpu: 
             self.__strategy = strategy
 
@@ -31,7 +32,7 @@ class Player():
 
     def play(self, card): 
         # How do I reference to the source and destination in the call in a way that I can call from in the player class
-        self._deck.
+        self.game.play(card, self.__hand, )
 
     def steal(self, source): 
 
