@@ -25,7 +25,8 @@ class Game():
                 self.set_players(players)
 
                 # Runs the base deck constructor
-                self.deck_constructor()
+                deck_constructor = self._game_yaml["deck_constructor"]
+                self._base_deck = Pile.Deck(deck_constructor)
 
     def set_players(self, players): 
         # Already defined in the gamepicker # Check that player array is valid and within the player_range
@@ -39,15 +40,12 @@ class Game():
 
         return self._player_list
         
-    def deck_constructor(): 
-        self._base_deck = Deck()
-        for card in self._game_yaml["deck_constructor"]["card_array"]: 
-            # How do I get the append 
-            self._base_deck.append(card)
+    def deck_constructor(card_array): 
+        
 
-    def pile_constructor(self, piles): 
+    # def pile_constructor(self, piles): 
     
-    def hand_constructor
+    # def hand_constructor
 
 
 
@@ -56,8 +54,7 @@ class Game():
         return self._player_list
         
     def new_game_session(self): 
-
-        if self._end_condition = 
+        if self._end_condition in implemented_end_conditions
         self.new_round()
         
 

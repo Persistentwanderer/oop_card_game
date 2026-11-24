@@ -1,7 +1,11 @@
 * ENGINE
-⊙ TODO Working Card Function 
-⊙ TODO Working Deck logic
-⊙ TODO Draw / Play Pile
+⊖ DONE Working Card Function
+  CLOSED: [2026-11-23 Mon 16:27]
+⊖ DONE Working Deck logic
+  CLOSED: [2026-11-23 Mon 17:42]
+  ⊘ TODO Working deck import logic
+⊙ TODO Working Draw / Play Pile objects
+  ⊘ TODO working initialisers based on YAML 
 ⊙ TODO Random Strategy implemented
 ⊙ TODO Running game.py with play_rules, session_setter and round setter 
 ⊙ TODO get bataille working
@@ -14,10 +18,22 @@
 ⊙ TODO dealer_player logic & rotation 
 ⊙ TODO card_effects and card_triggers in game.py
   ⊘ TODO card_effect_conditions
+⊙ TODO team config & logic
+  ⊘ TODO game.py team_setter and parameters 
+  Is it better to have it as a separate python file ? 
+  ⊘ TODO 
+⊙ TODO Proper Hands implementation:
+  ⊘ TODO hands on table / hands in hand section
+  ⊘ TODO hidden cards on table / seen / visible states for other players ?
+  ⊘ TODO  
+
+⊙ TODO Strategy cleanup 
+  ⊘ TODO tactical strategy cards_seen implementation
+  ⊘ TODO Custom per-game strategy options
 ⊙ TODO custom piles setting option
-⊙ TODO hands on table / hands in hand section
-⊙ TODO tactical strategy cards_seen implementation
-⊙ TODO can the 
+⊙ TODO additional card attributes
+⊙ TODO Single player games like Solitaire ? 
+⊙ TODO yaml validation in the game picker ie chetcking that all the game configuration settings work properly? 
 
 * Report
   ⊘ TODO decide game for simulation

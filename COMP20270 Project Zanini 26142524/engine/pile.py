@@ -1,29 +1,31 @@
 import Card
-import ABC
+# import ABC
 
-class Pile(ABC):
-    def __init__(self, input_cards, visibility): 
+class Pile():
+    def __init__(self, visibility):
         self.__card_list = []
-        for card in input_cards: 
-            self.__card_list.append(Card(card))
+        
 
     def deal_card(self, destination): 
-        #check the instance / class of the source and the destination
+        # check the instance / class of the source and the destination
         # then
         card_to_deal = self.__card_list[0]
         self.__card_list.pop[0]
         return card_to_deal
         
-    def add_card_to_deck(self, source): 
-        self.__card_list.append(source)
+    # def add_card_to_deck(self, card): 
+    #     """Appends a card object to the pile"""
+    #     self.__card_list.append(card)
 
     def shuffle(self):
-        self.__card_list = random.shuffle(self.__card_list)
-        return self.__card_list
+        """Shuffles the card list"""
+        random.shuffle(self.__card_list)
+        return
 
     def return_deck(self): 
+        """Returns a copy of the card list array."""
         if self._visibility == 1: 
-            return self.__card_list
+            return self.__card_list.copy()
         else: return None
     
     def return_pile_sorted_by_attribute(self, attribute): 
@@ -38,29 +40,40 @@ class Pile(ABC):
         self.__card_list.append(card)
 
     def __str__(self): 
-        return self.__card_list
+        if self.visible == True: 
+            output = ""
+            for card in self.__card_list: 
+                output+=str(card)+" "
+            return output
+        else: return None
 
 
 class DrawPile(Pile): 
-    def __init__(self, cards):
-        super().__init__()
+    def __init__(self, card_array, visibility=False):
+        super().__init__(card_array, visibility)
+        
 
 
-class DiscardPile(Pile): 
-    def __init__(self, cards):
-        super().__init__()
+# class DiscardPile(Pile): 
+#     def __init__(self, cards):
+#         super().__init__()
 
 
-class PlayPile(Pile):
-    def __init__(self, cards):
-        super().__init__()
+# class PlayPile(Pile):
+#     def __init__(self, cards):
+#         super().__init__()
 
-class Hand(Pile): 
-    def __init__(self, player):
-        super().__init__()
+# class Hand(Pile): 
+#     def __init__(self, player):
+#         super().__init__()
 
 class Deck(Pile):
-    def __init__(self, card_list):
-        super().__init__()
-        for card in card_list: 
-            self._
+    def __init__(self, card_array, visibility):
+        super().__init__(visibility)
+        for c in card_array:
+            c_value = c[0]
+            c_suit = c[1]
+            self.__card_list.append(Card.Card(c_value, c_suit))
+        self.visible = visibility
+    
+    def 

@@ -1,7 +1,7 @@
 # ==========================================
 # GAME METADATA & SETUP
 # ==========================================
-# All the data needed for the GamePicker
+# Data needed for the GamePicker
 game_metadata: 
   name: "" # string
   cover_art: "" # filepath in the game file directory
@@ -11,32 +11,30 @@ game_config:
     player_range:
       minimum: 1 # Integer > 0 
       maximum: 10 # Integer > minimum
-
   
   team_config: 
     teams_enabled: # true, false
     team_size: # int
-    unbalanced_team_size_resolution: # set, random, refuse
+    unbalanced_team_size_resolution: "set" # set, random, refuse
   
   dealer: 
-    dealer_enabled: # Options: true, false
-    dealer_player: # Defines if the dealer is a player, and what their r
+    dealer_enabled: false # Options: true, false
+    dealer_player: false # Defines if the dealer is a player, and what their r
     dealer_rotates: #
-        
-    dealer_strategy: # Options: "custom", "safe", "greedy"
-
-    
+    dealer_strategy: # Options: "safe", "greedy", "custom" - custom py file must be as DealerStrategy.py
 
 valid_strategies: []
 
 # ==========================================
 # DECK & CARD DEFINITIONS
 # ==========================================
+# Can this actually deal with more complex card games where you might have lots of different effect cards & special cards that don't match the value, suit paradigm? 
 deck_constructor:
   # Multiplier for the card_array 
   # You can enter an int (ie. 1, 2) or a dictionary where the key is the number of decks, and the values are the player counts corresponding to that number of players.
   # ie. {1:[1,2,3,4], 2:[5,6,7,8]}
-  number_of_decks: 1 
+  number_of_decks: 1
+  visible: true # Bool
   
   legal_cards:
     # Map card string names to integer weights (e.g., "Ace": 1, "King": 13)
@@ -44,69 +42,82 @@ deck_constructor:
       
     # Map suit string names to integer IDs (e.g., "Spades": 1, "Heart": 2)
     card_suits: {}
-      
+    
   # Format: "One card for each value and name", [[card_value, suit_id], [card_value, suit_id], ...]
   card_array: []
 
 # ==========================================
 # OTHER PILES
 # ==========================================
-pile_constructor: 
-  piles:
-    # Pile types are: draw_pile, play_pile, discard_pile
-    draw_pile:
-      - name: "" # string
-      - constructor: "full_deck" # "end_round" - do I need to define this actually ?
-    play_pile: 
-      name: "play_pile" #string
-    discard_pile:
-      name: "discard_pile"
-    
+pile_config:
+  # You can have several of one type of pile
+  # how to resolve this while still maintaining the naming scheme
+  # Pile types are: draw_pile, play_pile, discard_pile
+  draw_pile:
+    - name: "Draw Pile" # string
+    # - name: "Player 2 Draw Pile" # 
+  play_pile:
+    # How can we deal with variable size playing decks where you might pile cards on one on top of the other etc. 
+    Play Pile: 
+      - description: "Play Pile" #string
+      - visible: true 
+    Card 1: 
+      - description: "Slot for a card" #string
+      - visible: true 
+
+    # - name: "Pile 2" # String - if you have 5 cards laid face out but you can stack cards on top of them, this should be one single card. 
+  discard_pile:
+    - Discard:
+      - description: "Discard pile for cards no longer used"
+      - visible: true
+    # - Exhaust Pile: 
+    #   - description: "Exhausted Cards" 
+    #   - visible: false
+  
 
 # ==========================================
 # RULES, RANKING & EFFECTS
 # ==========================================
-card_ranking:
-  # Ordered from weakest to strongest 
+card_config:
+  # Ordered from weakest to strongest
   base_order: []
-  
-  # Options: true, false
-  trumps_exist: false
 
-card_effects:
-  available_options:
-  # Dictionary of supported card effect mechanics, and the args needed to run them:
-    - "clear_pile": 
-      - pile: # options: draw_pile, discard_pile, 
-    - "shuffle_pile": 
-      - pile: # options: draw_pile, discard_pile, draw_pile 
+  # Options: true, false
+  trump_config: 
+    - trumps_exist: false
+    - trump_behaviour: "round" # Options "round", "hand", "game"
+
+  card_effects:
+  # Is there a way to standardise / make it possible to have these be a list ? 
+  # supported card effect mechanics, and the args needed to run them:
+    - "clear_pile":
+      - pile: # options: draw_pile, discard_pile,
+    - "shuffle_pile":
+      - pile: # options: draw_pile, discard_pile, draw_pile
     - "skip_next_player_turn":
-       
       - conditions:  # Options: "unless_higher_card", "unless_equal_card"
       - number_of_players_to_skip: #int
-    - "reverse_turn_order"
-    - "peek_at_pile":
-      # "draw_pile", "opponent", "discard_pile", 
-      - source:
-      # Options: "self", "public"
-      - destination: 
+    - reverse_turn_order:
+      - reverse_turn_order_behaviour: "round" # Options: round, hand, game
+    - peek_at_pile:
+      # Either the name of a pile ie "Draw Pile" or "opponent_hand", "opponent_table", 
+      - source: "opponent_hand" # Options "opponent_hand", "opponent_hand_on_table", pilename
+      - destination: "self" # Options: "self", "public"
       - amount_of_cards: # Int
     - "steal": 
-      # Options: "opponenent_hand", "oppenent_table", "play_pile"
-      - source: 
+      # Options: "opponenent_hand", "oppenent_table", or pile name
+      - source: "opponent_hand" # Options "opponent_hand", "opponent_hand_on_table", pilename
+      - destination: "self_hand" # Options "self_hand", "self_hand_on_table", "opponent_hand", "opponent_hand_on_table", pilename
     - "swap": 
-      # Options "self", "opponent", ""
-      - "source_pile": 
-    - "murder"
-    - "draw_cards":
-    # Options: "self", 
-      - destination: 
+      - source: "opponent_hand" # Options "opponent_hand", "opponent_hand_on_table", pilename
+      - destination: "self_hand" # Options "self_hand", "self_hand_on_table", "opponent_hand", "opponent_hand_on_table", pilename
+    - murder: # Kill a card
+    - "draw_card":
+      - source: "Draw Pile" # Any defined pile name where it would make sense to draw 
+      - destination:
     # Number of cards to be drawn
       - number_of_cards: 0
-    
-  # List of effects actually enabled for this specific game
-  active_effects: []
-  
+      
   # Map specific cards or play conditions to the active effects above
   effect_triggers: []
     # Format example:
@@ -120,7 +131,7 @@ play_rules:
   must_follow_suit: false
   
   # Options: "equal_or_higher", "equal_or_lower", "higher", "lower", "any"
-  beat_previous_by: 
+  beat_previous_by: "equal_or_higher"
   
   # Define custom hierarchy names and their integer weights (e.g., Winner: 2, Loser: 0)
   player_ranks: {}
@@ -140,7 +151,7 @@ play_rules:
       enabled: true
       condition: "four_of_a_kind"
 
-    can_finish_on_special_card: true
+    cannot_finish_on_effect_card: true
 
 # ==========================================
 # SESSION & ROUND FLOW

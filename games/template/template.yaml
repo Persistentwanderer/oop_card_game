@@ -16,6 +16,7 @@ game_config:
   team_config: 
     teams_enabled: # true, false
     team_size: # int
+    team_behaviour: # string: "Round Robin", "Collaborative", ""
     unbalanced_team_size_resolution: # set, random, refuse
   
   dealer: 
