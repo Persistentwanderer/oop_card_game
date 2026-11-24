@@ -10,9 +10,6 @@ class GreedyStrategy(Strategy):
     def __init__(self, player, motivation): 
         super().__init__()
         self.__motivation = motivation
-    def choose_move(self, valid_moves): 
-        if "play" in valid_moves:
-            player.play_highest_card()
 
 class RandomStrategy(Strategy): 
     def __init__(self): 

@@ -4,7 +4,6 @@ import Card
 class Pile():
     def __init__(self, visibility):
         self.__card_list = []
-        
 
     def deal_card(self, destination): 
         # check the instance / class of the source and the destination
@@ -18,11 +17,11 @@ class Pile():
     #     self.__card_list.append(card)
 
     def shuffle(self):
-        """Shuffles the card list"""
+        """Shuffles the pile"""
         random.shuffle(self.__card_list)
         return
 
-    def return_deck(self): 
+    def return_pile(self): 
         """Returns a copy of the card list array."""
         if self._visibility == 1: 
             return self.__card_list.copy()
@@ -38,6 +37,9 @@ class Pile():
 
     def __setitem__(self, card):
         self.__card_list.append(card)
+
+    # def __getitem__(self): 
+
 
     def __str__(self): 
         if self.visible == True: 
@@ -76,4 +78,6 @@ class Deck(Pile):
             self.__card_list.append(Card.Card(c_value, c_suit))
         self.visible = visibility
     
-    def 
+
+    def __setitem__(): 
+        return ValueError("Cannot add a card to the main deck after init")

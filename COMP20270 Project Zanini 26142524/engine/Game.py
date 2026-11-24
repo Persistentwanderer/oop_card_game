@@ -38,7 +38,7 @@ class Game():
             # Need to check if this is the right syntax
             self.players.update(Player(p))
 
-        return self._player_list
+        return self.players
         
     def deck_constructor(card_array): 
         
@@ -66,11 +66,10 @@ class Game():
                 player.take_turn()
     
 
-    def distribute_cards(self): 
+    # def distribute_card(self, ):
+            
 
-        
-        
-    def write_statistics(self): 
-        if os.
+    # def write_statistics(self): 
+    #     if os.
 
 

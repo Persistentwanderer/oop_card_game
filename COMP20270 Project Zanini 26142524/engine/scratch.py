@@ -1,6 +1,6 @@
 import Card
 import Pile
-import Game
+# import Game
 # import Player
 
 card_array = [[1,1], [1,2], [1,4],[2,3]]
