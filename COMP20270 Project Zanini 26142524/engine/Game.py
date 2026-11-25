@@ -1,32 +1,38 @@
 import os
 import json 
 # import json_stream
-import yaml
+try:
+    from yaml import CLoader as Loader, CDumper as Dumper
+except ImportError:
+    from yaml import Loader, Dumper
+
 import Card
-import Deck
+import Pile
 import Player
 
+
 class Game(): 
-    def __init__(self, game_file:str|None, players:dict|None, number_of_cpu:int|None, *args): 
+    def __init__(self, game_file, players, number_of_cpu, *args): 
         if game_file: 
             # 3. Deserialize back into Book objects using JsonMixin.from_dict()
-            with open(str(chosen_game), "r", encoding="utf-8") as f:
-                self._game_yaml = yaml.load(chosen_game)
+            with open(str(game_file), "r", encoding="utf-8") as f:
+                self._game_yaml = yaml.load(game_file, Loader=Loader)
 
-                self.name = self._game_yaml["game_metadata"]["name"]
+                print yaml.dump(self._game_yaml, default_flow_style=False)
+                # self.name = self._game_yaml["game_metadata"]["name"]
 
-                # Handles games with one dealer
-                dealer = self._game_yaml["game_config"]["dealer"]
-                if dealer["dealer_enabled"]: 
-                    import Dealer
-                    self._dealer = Dealer(dealer)
+                # # Handles games with one dealer
+                # dealer = self._game_yaml["game_config"]["dealer"]
+                # if dealer["dealer_enabled"]: 
+                #     import Dealer
+                #     self._dealer = Dealer(dealer)
                 
-                # Sets player details
-                self.set_players(players)
+                # # Sets player details
+                # self.set_players(players)
 
-                # Runs the base deck constructor
-                deck_constructor = self._game_yaml["deck_constructor"]
-                self._base_deck = Pile.Deck(deck_constructor)
+                # # Runs the base deck constructor
+                # deck_constructor = self._game_yaml["deck_constructor"]
+                # self._base_deck = Pile.Deck(deck_constructor)
 
     def set_players(self, players): 
         # Already defined in the gamepicker # Check that player array is valid and within the player_range
@@ -40,7 +46,10 @@ class Game():
 
         return self.players
         
-    def deck_constructor(card_array): 
+    # need to add legal_cards and other elements 
+    def deck_constructor(card_array):
+        Pile.Deck(card_array, true)
+
         
 
     # def pile_constructor(self, piles): 
@@ -53,9 +62,9 @@ class Game():
     def list_players(self): 
         return self._player_list
         
-    def new_game_session(self): 
-        if self._end_condition in implemented_end_conditions
-        self.new_round()
+    # def new_game_session(self): 
+    #     if self._end_condition in implemented_end_conditions
+    #     self.new_round()
         
 
     def new_round(self): 

@@ -129,6 +129,8 @@ card_config:
 play_rules:
   # Options: false, "strictly_true", "true"
   must_follow_suit: false
+  card_equality_parameter: ["value","suit"]
+
   
   # Options: "equal_or_higher", "equal_or_lower", "higher", "lower", "any"
   beat_previous_by: "equal_or_higher"

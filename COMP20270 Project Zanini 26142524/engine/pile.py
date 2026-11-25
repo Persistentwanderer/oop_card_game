@@ -3,7 +3,7 @@ import Card
 
 class Pile():
     def __init__(self, visibility):
-        self.__card_list = []
+        self._card_list = []
 
     def deal_card(self, destination): 
         # check the instance / class of the source and the destination
@@ -44,7 +44,7 @@ class Pile():
     def __str__(self): 
         if self.visible == True: 
             output = ""
-            for card in self.__card_list: 
+            for card in self._card_list: 
                 output+=str(card)+" "
             return output
         else: return None
@@ -75,7 +75,7 @@ class Deck(Pile):
         for c in card_array:
             c_value = c[0]
             c_suit = c[1]
-            self.__card_list.append(Card.Card(c_value, c_suit))
+            self._card_list.append(Card.Card(c_value, c_suit))
         self.visible = visibility
     
 
