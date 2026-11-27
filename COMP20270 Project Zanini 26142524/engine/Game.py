@@ -18,7 +18,7 @@ class Game():
             with open(str(game_file), "r", encoding="utf-8") as f:
                 self._game_yaml = yaml.load(game_file, Loader=Loader)
 
-                print yaml.dump(self._game_yaml, default_flow_style=False)
+                print(yaml.dump(self._game_yaml, default_flow_style=False))
                 # self.name = self._game_yaml["game_metadata"]["name"]
 
                 # # Handles games with one dealer
